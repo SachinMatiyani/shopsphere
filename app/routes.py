@@ -27,4 +27,13 @@ def products():
         
         return jsonify({"message": "Product has successfully been added!"})
     else:
-        return jsonify({"products": []})
+        products = Product.query.all()
+        product_list = []
+
+        for product in products:
+            product_list.append({
+                "id": product.id,
+                "name": product.name,
+                "price": product.price
+            })
+        return jsonify(product_list)
